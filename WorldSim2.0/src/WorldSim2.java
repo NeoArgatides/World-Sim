@@ -72,7 +72,7 @@ public class WorldSim2
 		
 		civ civ_array[]; 
 		for (int i=0; i<10; i++) { //start game with 10 civilizations, change later. Add each to array. 
-			
+			 
 		}
 		
 		
