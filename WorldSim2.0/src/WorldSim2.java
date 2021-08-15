@@ -1,5 +1,10 @@
 //drake3
 
+/*
+String print = "";
+System.out.println(print);
+ */
+
 import java.util.Random;
 import java.util.Scanner;
 
@@ -12,10 +17,15 @@ public class WorldSim2
 	
 	public static void main(String[] args)
     {
+		int gamemode = init();
 		
+		if (gamemode == 1) {
+			defaultSim();
+		}
     }
-	
-	public static String gen_countryname() { //generate a name for country
+		
+	public static String gen_name() { //generate a name for country
+
 		String[] syllables_1 = { "Kek", "Tru", "Ve", "Swed", "Dra", "Sea", "Se", "Ame", "Co", "Las", "Lac", "Azer", "Colum", "Bhu"};
 		String[] syllables_2 = { "ki", "ik", "ak", "", "i", "ek", "ti", "ji", "bi", "ri", "ri"};
 		String[] syllables_3 = { "stan", "land", "la", "go", "en", "ca", "an", "any", "na", "len"};
@@ -33,11 +43,44 @@ public class WorldSim2
 		//System.out.println(gen_name);
 		return(gen_name);
 	}
+
+	public static int init() { //initialize the game. Introductory text
+
+		String print = "WorldSim2 v1.0.0";
+		System.out.println(print);
+		
+		print = "Enter gamemode selection:";
+		System.out.println(print);
+		print = "1 - Default World Simulation";
+		System.out.println(print);
+		
+		Scanner scan = new Scanner(System.in);
+		int input = scan.nextInt();
+		
+		return input;
+	}
+
+	public static civ initCiv() {	//init new civilization stats, generate name etc
+		civ new_civ = new civ();
+		new_civ.name = gen_name();
+		
+		return new_civ;
+	}
 	
+	//--------------------------------------------------------------------------------------------------------------------
+	public static void defaultSim() {
+		
+		civ civ_array[]; 
+		for (int i=0; i<10; i++) { //start game with 10 civilizations, change later. Add each to array. 
+			
+		}
+		
+		
+	}
 }
 
 
-class civilization {
+class civ {
 
 		String name = "";		
 		int population = 0;
