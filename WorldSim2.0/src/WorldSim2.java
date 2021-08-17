@@ -10,11 +10,7 @@ import java.util.Scanner;
 
 public class WorldSim2 
 {
-	public WorldSim2()
-	{
-		
-	}
-	
+
 	public static void main(String[] args)
     {
 		int gamemode = init();
@@ -26,9 +22,9 @@ public class WorldSim2
 		
 	public static String gen_name() { //generate a name for country
 
-		String[] syllables_1 = { "Kek", "Tru", "Ve", "Swed", "Dra", "Sea", "Se", "Ame", "Co", "Las", "Lac", "Azer", "Colum", "Bhu"};
-		String[] syllables_2 = { "ki", "ik", "ak", "", "i", "ek", "ti", "ji", "bi", "ri", "ri"};
-		String[] syllables_3 = { "stan", "land", "la", "go", "en", "ca", "an", "any", "na", "len"};
+		String[] syllables_1 = { "Kek", "Tru", "Ve", "Swed", "Dra", "Sea", "Se", "Ame", "Co", "Las", "Lac", "Azer", "Colum", "Bhu", "Bar"};
+		String[] syllables_2 = { "ki", "ik", "ak", "", "i", "ek", "ti", "ji", "bi", "ri", "ri", "ru"};
+		String[] syllables_3 = { "stan", "land", "la", "go", "en", "ca", "an", "any", "na", "len", "tia"};
 		
 		
 		Random rand = new Random(); 
@@ -61,22 +57,33 @@ public class WorldSim2
 	}
 
 	public static civ initCiv() {	//init new civilization stats, generate name etc
-		civ new_civ = new civ("", 0, 0, 0, 0, 0, 0, 0, 0, 0);
 		
-		new_civ.name = gen_name();
-		new_civ.id= 0;
+		String name = gen_name();		
+		int population = ;
+		int stage = 1; 
+		int wealth;
+		int food_supply; 
+		int health; 
+		int technology;
 		
+		int id;
 		
+		int x;
+		int y;
+		
+		civ new_civ = new civ("", 0, 0, 0, 0, 0, 0, 0, 0, 0);	
 		return new_civ;
 	}
 	
-	//--------------------------------------------------------------------------------------------------------------------
+	//==============================================================
 	public static void defaultSim() {
 		civ civ_array[]; 
 		for (int i=0; i<10; i++) { //start game with 10 civilizations, change later. Add each to array. 
 			 
 		}
 	}
+
+	//==============================================================
 }
 
 
