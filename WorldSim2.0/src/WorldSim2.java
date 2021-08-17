@@ -44,7 +44,7 @@ public class WorldSim2
 		return(gen_name);
 	}
 
-	public static int init() { //initialize the game. Introductory text   
+	public static int init() { //initialize the game. Introductory text    
 
 		String print = "WorldSim2 v1.0.0"; 
 		System.out.println(print); 
