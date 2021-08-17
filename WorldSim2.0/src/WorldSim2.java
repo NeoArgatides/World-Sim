@@ -61,44 +61,40 @@ public class WorldSim2
 	}
 
 	public static civ initCiv() {	//init new civilization stats, generate name etc
-		civ new_civ = new civ();
+		civ new_civ = new civ("", 0, 0, 0, 0, 0, 0, 0, 0, 0);
+		
 		new_civ.name = gen_name();
+		new_civ.id= 0;
+		
 		
 		return new_civ;
 	}
 	
 	//--------------------------------------------------------------------------------------------------------------------
 	public static void defaultSim() {
-		
 		civ civ_array[]; 
 		for (int i=0; i<10; i++) { //start game with 10 civilizations, change later. Add each to array. 
 			 
 		}
-		
-		
 	}
 }
 
 
-class civ
-{
-	public civ(String name, int population, int stage, int wealth, int food_supply, int health, int technology, int id, int x, int y)
-	{
+class civ {
+	public civ(String i_name, int i_population, int i_stage, int i_wealth, int i_food_supply, int i_health, int i_technology, int i_id, int i_x, int i_y) {
+		String name = i_name;		
+		int population = i_population;
+		int stage = i_stage; 
+		int wealth = i_wealth; 
 		
-	}
-
-		String name = "";		
-		int population = 0;
-		int stage = 1; 
-		int wealth = 0; 
+		int food_supply = i_food_supply; 
+		int health = i_health; 
+		int technology = i_technology;
 		
-		int food_supply = 0; 
-		int health = 0; 
-		int technology = 0;
+		int id = i_id;
 		
-		int id = 0;
-		
-		int x = 0;
-		int y = 0;
-		
+		int x = i_x;
+		int y = i_y;		
+	
+	}	
 } 
