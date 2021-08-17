@@ -81,20 +81,31 @@ public class WorldSim2
 
 
 class civ {
-	public civ(String i_name, int i_population, int i_stage, int i_wealth, int i_food_supply, int i_health, int i_technology, int i_id, int i_x, int i_y) {
-		String name = i_name;		
-		int population = i_population;
-		int stage = i_stage; 
-		int wealth = i_wealth; 
-		
-		int food_supply = i_food_supply; 
-		int health = i_health; 
-		int technology = i_technology;
-		
-		int id = i_id;
-		
-		int x = i_x;
-		int y = i_y;		
+	String name;		
+	int population;
+	int stage; 
+	int wealth;
+	int food_supply; 
+	int health; 
+	int technology;
 	
+	int id;
+	
+	int x;
+	int y;
+	
+	public civ(String i_name, int i_population, int i_stage, int i_wealth, int i_food_supply, int i_health, int i_technology, int i_id, int i_x, int i_y) {
+		name = i_name;
+		population = i_population;
+		stage = i_stage;
+		wealth = i_wealth;
+		food_supply = i_food_supply;
+		health = i_health;
+		technology = i_technology;
+		id = i_id;
+		x = i_x;
+		y = i_y;
 	}	
+	
+	
 } 
