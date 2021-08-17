@@ -41,14 +41,9 @@ public class WorldSim2
 	}
 
 	public static int init() { //initialize the game. Introductory text    
-
-		String print = "WorldSim2 v1.0.0"; 
-		System.out.println(print); 
-		
-		print = "Enter gamemode selection:";
-		System.out.println(print);
-		print = "1 - Default World Simulation";
-		System.out.println(print);
+		print("WorldSim2 v1.0.0");
+		print("Enter gamemode selection:");
+		print("1 - Default World Simulation");
 		
 		Scanner scan = new Scanner(System.in);
 		int input = scan.nextInt();
@@ -59,7 +54,7 @@ public class WorldSim2
 	public static civ initCiv() {	//init new civilization stats, generate name etc
 		
 		String name = gen_name();		
-		int population = ;
+		int population = new Random().nextInt((25 - 5) + 1) + 5;
 		int stage = 1; 
 		int wealth;
 		int food_supply; 
@@ -81,6 +76,10 @@ public class WorldSim2
 		for (int i=0; i<10; i++) { //start game with 10 civilizations, change later. Add each to array. 
 			 
 		}
+	}
+	
+	public static void print(String input) {
+		System.out.println(input);
 	}
 
 	//==============================================================
