@@ -5,6 +5,7 @@ String print = "";
 System.out.println(print);
  */
 
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -72,11 +73,13 @@ public class WorldSim2
 	
 	//==============================================================
 	public static void defaultSim() {
-		civ civ_array[];
+		ArrayList<civ> civ_list = new ArrayList<civ>();
+		
+		//civ civ_array[];
 		int total_civ_count = 0;
 		for (int i=0; i<10; i++) { //start game with 10 civilizations, change later. Add each to array. 
 			 total_civ_count++; //dont type naything ok so so when when i ad to the array lis ima use init civ is that a yesn word peepee poo balls hmm 
-			 
+			 civ_list.add(initCiv(total_civ_count));
 		}
 	}
 	
