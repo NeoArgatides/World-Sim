@@ -51,22 +51,22 @@ public class WorldSim2
 		return input;
 	}
 
-	public static civ initCiv() {	//init new civilization stats, generate name etc
+	public static civ initCiv(int total_civ_count) {	//init new civilization stats, generate name etc. total civ count is inputted for ID
 		
 		String name = gen_name();		
 		int population = rn(5, 25);
 		int stage = 1; 
-		int wealth;
-		int food_supply; 
-		int health; 
-		int technology;
+		int wealth = rn(1, 6);
+		int food_supply = (int)population/10; //make sure dont break. thx
+		int health = rn(80, 100); 
+		int technology = 1;
 		
-		int id;
+		int id = total_civ_count;
 		
-		int x;
-		int y;
+		int x = rn(0, 100);
+		int y = rn(0, 100);
 		
-		civ new_civ = new civ("", 0, 0, 0, 0, 0, 0, 0, 0, 0);	
+		civ new_civ = new civ(name, population, stage, wealth, food_supply, health, technology, id, x, y);	
 		return new_civ;
 	}
 	
@@ -81,7 +81,6 @@ public class WorldSim2
 	public static void print(String input) {
 		System.out.println(input);
 	}
-	
 	public static int rn(int min, int max) {
 		return new Random().nextInt((max - min) + 1) + min;
 	}
