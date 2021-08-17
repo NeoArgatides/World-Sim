@@ -80,7 +80,12 @@ public class WorldSim2
 }
 
 
-class civ {
+class civ
+{
+	public civ(String name, int population, int stage, int wealth, int food_supply, int health, int technology, int id, int x, int y)
+	{
+		
+	}
 
 		String name = "";		
 		int population = 0;
@@ -96,4 +101,4 @@ class civ {
 		int x = 0;
 		int y = 0;
 		
-}
+} 
