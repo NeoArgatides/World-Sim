@@ -40,7 +40,7 @@ public class WorldSim2
 		return(gen_name);
 	}
 
-	public static int init() { //initialize the game. Introductory text    
+	public static int init() { //initialize the game. Introductory text
 		print("WorldSim2 v1.0.0");
 		print("Enter gamemode selection:");
 		print("1 - Default World Simulation");
@@ -58,7 +58,7 @@ public class WorldSim2
 		int stage = 1; 
 		int wealth = rn(1, 6);
 		int food_supply = (int)population/10; //make sure dont break. thx
-		int health = rn(80, 100); 
+		int health = rn(20, 40); 
 		int technology = 1;
 		
 		int id = total_civ_count;
@@ -72,8 +72,10 @@ public class WorldSim2
 	
 	//==============================================================
 	public static void defaultSim() {
-		civ civ_array[]; 
+		civ civ_array[];
+		int total_civ_count = 0;
 		for (int i=0; i<10; i++) { //start game with 10 civilizations, change later. Add each to array. 
+			 total_civ_count++; //dont type naything ok so so when when i ad to the array lis ima use init civ is that a yesn word peepee poo balls hmm 
 			 
 		}
 	}
