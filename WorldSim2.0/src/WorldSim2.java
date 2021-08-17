@@ -54,7 +54,7 @@ public class WorldSim2
 	public static civ initCiv() {	//init new civilization stats, generate name etc
 		
 		String name = gen_name();		
-		int population = new Random().nextInt((25 - 5) + 1) + 5;
+		int population = rn(5, 25);
 		int stage = 1; 
 		int wealth;
 		int food_supply; 
@@ -80,6 +80,10 @@ public class WorldSim2
 	
 	public static void print(String input) {
 		System.out.println(input);
+	}
+	
+	public static int rn(int min, int max) {
+		return new Random().nextInt((max - min) + 1) + min;
 	}
 
 	//==============================================================
