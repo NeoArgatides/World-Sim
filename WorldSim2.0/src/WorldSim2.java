@@ -47,7 +47,7 @@ public class WorldSim2
 	public static int init() { //initialize the game. Introductory text
 
 		String print = "WorldSim2 v1.0.0";
-		System.out.println(print);
+		System.out.println(print); 
 		
 		print = "Enter gamemode selection:";
 		System.out.println(print);
