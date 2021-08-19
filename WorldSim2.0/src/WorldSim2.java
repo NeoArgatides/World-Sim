@@ -90,7 +90,8 @@ public class WorldSim2
 	public static civ simulate(civ civ2) {  //simulates 1 year
 		
 		//natural population growth
-		float m_population = (((civ2.health / 50)-1)*(civ2.incentive/50)-1) /2;
+		float m_population = ((civ2.incentive / 50)-1)-((civ2.health / 50)-1);
+		
 		int d_population = (int)(m_population * (civ2.population / 10)); //10 is the exponential modifier may need to be changed (very important)
 		
 		//starvation
