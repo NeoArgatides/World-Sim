@@ -61,20 +61,21 @@ public class WorldSim2
 		int stage = 1; 
 		int wealth = rn(1, 6);
 		int food_supply = (int)population/10; //make sure dont break. thx
-		int health = rn(20, 40); 
+		int health = rn(40, 60); 
 		int technology = 1;
+		int incentive = 70; //incentive to have kids
 		
 		int id = total_civ_count;
 		
 		int x = rn(0, 100);
 		int y = rn(0, 100);
 		
-		civ new_civ = new civ(name, population, stage, wealth, food_supply, health, technology, id, x, y);	
+		civ new_civ = new civ(name, population, stage, wealth, food_supply, health, technology, id, x, y, incentive);	
 		return new_civ;
 	}
 	
 	//==============================================================
-	public static void defaultSim() {
+	public static void defaultSim() { //initializes and runs default simulation w no user input
 		ArrayList<civ> civ_list = new ArrayList<civ>();
 		
 		//civ civ_array[];
@@ -84,6 +85,33 @@ public class WorldSim2
 			 civ_list.add(initCiv(total_civ_count));
 		}
 	}
+	
+	
+	public static civ simulate(civ civ2) {  //simulates 1 year
+		
+		//natural population growth
+		float m_population = (((civ2.health / 50)-1)*(civ2.incentive/50)-1) /2;
+		int d_population = (int)(m_population * (civ2.population / 10)); //10 is the exponential modifier may need to be changed (very important)
+		
+		//starvation
+		if (civ2.food_supply*10 < civ2.population) {
+			int population_over_food = (civ2.population - (civ2.food_supply*10)); //people not supported by current food
+			d_population -= population_over_food;
+		}
+		
+		
+		//eatin da food
+		civ2.food_supply -= (int) (civ2.population/10);
+		
+		
+		
+		
+		
+		
+		
+		return civ2;
+	}
+	
 	
 	public static void print(String input) {
 		System.out.println(input);
@@ -104,13 +132,14 @@ class civ {
 	int food_supply; 
 	int health; 
 	int technology;
+	int incentive;
 	
 	int id;
 	
 	int x;
 	int y;
 	
-	public civ(String i_name, int i_population, int i_stage, int i_wealth, int i_food_supply, int i_health, int i_technology, int i_id, int i_x, int i_y) {
+	public civ(String i_name, int i_population, int i_stage, int i_wealth, int i_food_supply, int i_health, int i_technology, int i_id, int i_x, int i_y, int i_incentive) {
 		name = i_name;
 		population = i_population;
 		stage = i_stage;
@@ -118,6 +147,7 @@ class civ {
 		food_supply = i_food_supply;
 		health = i_health;
 		technology = i_technology;
+		incentive = i_incentive;
 		id = i_id;
 		x = i_x;
 		y = i_y;
