@@ -101,7 +101,11 @@ public class WorldSim2
 		
 		//change in the tech and the health
 		float m_technology = (-(2/civ2.wealth)+100)/100; //2 may need to be changed if tech changes too radically (reciprocal 1/x function)
-		int d_tech = (int)(10*m_technology); 
+		int d_tech = (int)(5*m_technology); 
+		
+		
+		float m_health = (-(2/civ2.technology)+100)/100; 
+		int d_health = (int)(*m_health); 
 		
 		//agriculutral revolution, tech needs to go up
 		
