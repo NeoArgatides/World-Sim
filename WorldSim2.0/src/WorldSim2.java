@@ -90,16 +90,20 @@ public class WorldSim2
 	public static civ simulate(civ civ2) {  //simulates 1 year
 		
 		//natural population growth
-		float m_population = ((civ2.incentive / 50)-1)-((civ2.health / 50)-1);
-		
+		float m_population = (civ2.incentive - (100-civ2.health)) / 100;
 		int d_population = (int)(m_population * (civ2.population / 10)); //10 is the exponential modifier may need to be changed (very important)
 		
 		//starvation
 		if (civ2.food_supply*10 < civ2.population) {
 			int population_over_food = (civ2.population - (civ2.food_supply*10)); //people not supported by current food
-			d_population -= population_over_food;
+			d_population -= population_over_food/2;
 		}
 		
+		//change in the tech and the health
+		float m_technology = (-(2/civ2.wealth)+100)/100; //2 may need to be changed if tech changes too radically (reciprocal 1/x function)
+		int d_tech = (int)(10*m_technology); 
+		
+		//agriculutral revolution, tech needs to go up
 		
 		//eatin da food
 		civ2.food_supply -= (int) (civ2.population/10);
