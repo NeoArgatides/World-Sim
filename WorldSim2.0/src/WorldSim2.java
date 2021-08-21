@@ -148,20 +148,23 @@ public class WorldSim2
 		d_incentive++;
 		
 		//producing da food
-		if (civ2.food_supply/10 < civ2.population) {
-			civ2.food_supply++;
-		}
-		
 		civ2.food_supply += (int) (civ2.population * 1.4 * m_health);
+		civ2.food_supply--; //da food go bad
 		
 		//eatin da food
 		civ2.food_supply -= (int)(civ2.population/10);
 		
 		//apply deltas
-		 
+		civ2.population += d_population;
+		civ2.technology += d_tech;
+		civ2.health += d_health;
+		civ2.incentive += d_incentive;
 		
 		//cap variables above 0 below 100
 		
+		if (civ2.population < 0) {
+			
+		}
 		
 		return civ2;
 	}
