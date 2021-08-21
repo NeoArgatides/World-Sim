@@ -89,6 +89,8 @@ public class WorldSim2
 	
 	public static civ simulate(civ civ2) {  //simulates 1 year
 		
+
+		
 		//natural population growth
 		float m_population = (civ2.incentive - (100-civ2.health)) / 100;
 		int d_population = (int)(m_population * (civ2.population / 10)); //10 is the exponential modifier may need to be changed (very important)
@@ -104,22 +106,44 @@ public class WorldSim2
 		int d_tech = (int)(5*m_technology); 
 		
 		
-		float m_health = (-(2/civ2.technology)+100)/100; //health aka deathrate needs to go up with technology, and will go down with infectious diseases which we havent made yet. ok
-		//int d_health = (int)(*m_health); 
+		float m_health = (-(2/civ2.technology)+100)/100; //health aka inverse deathrate needs to go up with technology, and will go down with infectious diseases which we havent made yet. ok
+		int d_health = (int)(5*m_health); 
+		
+		int disease_spike;
+		disease_spike = rn(0, 20);
+		if (disease_spike == 1) {
+			civ2.disease_severity += rn(20, 40);
+			civ2.health -= civ2.disease_severity;
+			
+			if (civ2.disease_severity > 100) {
+				civ2.disease_severity = 100;
+			}
+		}
+		
+		if (civ2.disease_severity > 0) {
+			
+			d_population -= (int)((civ2.disease_severity / 100) * (civ2.population / 10)); //dying of disease
+			
+			civ2.disease_severity -= (int)(6*m_health); //disease severity going down based on technology as defined above
+			
+		}
 		
 		
 		
-		
-		
-		//agriculutral revolution, tech needs to go up
+		//determine delta incentive to have sex
+		int d_incentive = 0;
+		d_incentive -= (int)((100 - civ2.health) + civ2.disease_severity)/10;
+		d_incentive += (-(10/civ2.wealth)+100)/100;
+		d_incentive++;
+
 		
 		//eatin da food
 		civ2.food_supply -= (int) (civ2.population/10);
 		
-		
+		//apply deltas
 		 
 		
-		
+		//cap variables above 0 below 100
 		
 		
 		return civ2;
@@ -146,6 +170,7 @@ class civ {
 	int health; 
 	int technology;
 	int incentive;
+	int disease_severity;
 	
 	int id;
 	
@@ -164,6 +189,7 @@ class civ {
 		id = i_id;
 		x = i_x;
 		y = i_y;
+		disease_severity = 0;
 	}	
 	
 	
