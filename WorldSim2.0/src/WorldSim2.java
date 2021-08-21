@@ -11,6 +11,8 @@ import java.util.Scanner;
 import java.util.Timer;
 
 import java.awt.Color;
+import java.awt.BasicStroke;
+import java.awt.Dimension;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -147,6 +149,11 @@ public class WorldSim2
 
 		//eatin da food
 		civ2.food_supply -= (int)(civ2.population/10);
+		
+		//producing the food
+		if (civ2.food_supply*10 < civ2.population)
+		civ2.food_supply++;
+		
 		
 		//apply deltas
 		 
