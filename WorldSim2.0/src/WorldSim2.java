@@ -104,8 +104,12 @@ public class WorldSim2
 		int d_tech = (int)(5*m_technology); 
 		
 		
-		float m_health = (-(2/civ2.technology)+100)/100; 
-		int d_health = (int)(*m_health); 
+		float m_health = (-(2/civ2.technology)+100)/100; //health aka deathrate needs to go up with technology, and will go down with infectious diseases which we havent made yet. ok
+		//int d_health = (int)(*m_health); 
+		
+		
+		
+		
 		
 		//agriculutral revolution, tech needs to go up
 		
@@ -113,7 +117,7 @@ public class WorldSim2
 		civ2.food_supply -= (int) (civ2.population/10);
 		
 		
-		
+		 
 		
 		
 		
