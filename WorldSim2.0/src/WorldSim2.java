@@ -144,16 +144,18 @@ public class WorldSim2
 		//determine delta incentive to have sex
 		int d_incentive = 0;
 		d_incentive -= (int)((100 - civ2.health) + civ2.disease_severity)/10;
-		d_incentive += (int)5*(-(10/civ2.wealth)+100)/100;
+		d_incentive += (int)(5*(-(10/civ2.wealth)+100)/100);
 		d_incentive++;
-
+		
+		//producing da food
+		if (civ2.food_supply/10 < civ2.population) {
+			civ2.food_supply++;
+		}
+		
+		civ2.food_supply += (int) (civ2.population * 1.4 * m_health);
+		
 		//eatin da food
 		civ2.food_supply -= (int)(civ2.population/10);
-		
-		//producing the food
-		if (civ2.food_supply*10 < civ2.population)
-		civ2.food_supply++;
-		
 		
 		//apply deltas
 		 
