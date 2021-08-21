@@ -10,6 +10,22 @@ import java.util.Random;
 import java.util.Scanner;
 import java.util.Timer;
 
+import java.awt.Color;
+
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
+import org.jfree.data.xy.XYDataset;
+import org.jfree.data.xy.XYSeries;
+import org.jfree.data.xy.XYSeriesCollection;
+import org.jfree.ui.ApplicationFrame;
+import org.jfree.ui.RefineryUtilities;
+//import org.jfree.ui.Spacer;
+
 
 public class WorldSim2 
 {
@@ -89,8 +105,6 @@ public class WorldSim2
 	
 	public static civ simulate(civ civ2) {  //simulates 1 year
 		
-
-		
 		//natural population growth
 		float m_population = (civ2.incentive - (100-civ2.health)) / 100;
 		int d_population = (int)(m_population * (civ2.population / 10)); //10 is the exponential modifier may need to be changed (very important)
@@ -104,7 +118,6 @@ public class WorldSim2
 		//change in the tech and the health
 		float m_technology = (-(2/civ2.wealth)+100)/100; //2 may need to be changed if tech changes too radically (reciprocal 1/x function)
 		int d_tech = (int)(5*m_technology); 
-		
 		
 		float m_health = (-(2/civ2.technology)+100)/100; //health aka inverse deathrate needs to go up with technology, and will go down with infectious diseases which we havent made yet. ok
 		int d_health = (int)(5*m_health); 
@@ -121,24 +134,19 @@ public class WorldSim2
 		}
 		
 		if (civ2.disease_severity > 0) {
-			
 			d_population -= (int)((civ2.disease_severity / 100) * (civ2.population / 10)); //dying of disease
 			
-			civ2.disease_severity -= (int)(6*m_health); //disease severity going down based on technology as defined above
-			
+			civ2.disease_severity -= (int)(6*m_health); //disease severity going down based on technology as defined above	
 		}
-		
-		
-		
+				
 		//determine delta incentive to have sex
 		int d_incentive = 0;
 		d_incentive -= (int)((100 - civ2.health) + civ2.disease_severity)/10;
-		d_incentive += (-(10/civ2.wealth)+100)/100;
+		d_incentive += (int)5*(-(10/civ2.wealth)+100)/100;
 		d_incentive++;
 
-		
 		//eatin da food
-		civ2.food_supply -= (int) (civ2.population/10);
+		civ2.food_supply -= (int)(civ2.population/10);
 		
 		//apply deltas
 		 
