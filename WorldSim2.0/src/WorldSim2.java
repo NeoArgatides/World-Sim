@@ -152,8 +152,8 @@ public class WorldSim2
 	public static civ simulate(civ civ2, int debug) {  //simulates 1 year
 		
 		//natural population growth
-		float m_population = ((civ2.incentive - (100-civ2.health)) / 100);
-		float d_population = (m_population * (civ2.population / 10)); //10 is the exponential modifier may need to be changed (very important)
+		float m_population = (((float)civ2.incentive - (100-(float)civ2.health)) / 100);
+		float d_population = (m_population * ((float)civ2.population / 10)); //10 is the exponential modifier may need to be changed (very important)
 		
 		//starvation
 		if (civ2.food_supply*10 < civ2.population) {
@@ -162,7 +162,7 @@ public class WorldSim2
 		}
 		
 		//change in the tech and the health
-		float m_technology = (-(2/civ2.wealth)+100)/100; //2 may need to be changed if tech changes too radically (reciprocal 1/x function)
+		float m_technology = (-(2/(float)civ2.wealth)+100)/100; //2 may need to be changed if tech changes too radically (reciprocal 1/x function)
 		int d_tech = (int)(5*m_technology); 
 		
 		float m_health = -(float)(Math.pow(civ2.technology, -0.25)) + 1;  //health aka inverse deathrate needs to go up with technology, and will go down with infectious diseases which we havent made yet. ok
@@ -177,7 +177,7 @@ public class WorldSim2
 		}
 		
 		if (civ2.disease_severity > 0) {
-			d_population -= (int)((civ2.disease_severity / 100) * (civ2.population / 10)); //dying of disease
+			d_population -= (int)(((float)civ2.disease_severity / 100) * ((float)civ2.population / 10)); //dying of disease
 			
 			civ2.disease_severity -= (int)(6*m_health); //disease severity going down based on technology as defined above	
 		}
@@ -185,7 +185,7 @@ public class WorldSim2
 		//determine delta incentive to have sex
 		int d_incentive = 0;
 		d_incentive -= (int)((100 - civ2.health) + civ2.disease_severity)/10;
-		d_incentive += (int)(3*(-(10/civ2.wealth)+100)/100); //3 is the modifier. make sure its good
+		d_incentive += (int)(3*(-(10/(float)civ2.wealth)+100)/100); //3 is the modifier. make sure its good
 		d_incentive++;
 		
 		//producing da food
@@ -193,7 +193,7 @@ public class WorldSim2
 		civ2.food_supply--; //da food go bad
 		
 		//eatin da food
-		civ2.food_supply -= (int)(civ2.population/10);
+		civ2.food_supply -= (int)((float)civ2.population/10);
 		
 		//apply deltas
 		civ2.population += d_population;
