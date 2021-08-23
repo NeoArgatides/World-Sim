@@ -145,11 +145,11 @@ public class WorldSim2
 		
 		//natural population growth
 		float m_population = (civ2.incentive - (100-civ2.health)) / 100;
-		int d_population = (int)(m_population * (civ2.population / 10)); //10 is the exponential modifier may need to be changed (very important)
+		float d_population = (m_population * (civ2.population / 10)); //10 is the exponential modifier may need to be changed (very important)
 		
 		//starvation
 		if (civ2.food_supply*10 < civ2.population) {
-			int population_over_food = (civ2.population - (civ2.food_supply*10)); //people not supported by current food
+			int population_over_food = ((int)civ2.population - (civ2.food_supply*10)); //people not supported by current food
 			d_population -= population_over_food/2;
 		}
 		
@@ -229,7 +229,7 @@ public class WorldSim2
 		printLine = "Stage: " + civ2.stage;
 		print(printLine);
 	
-		printLine = "Population: " + civ2.population;
+		printLine = "Population: " + (int)civ2.population;
 		print(printLine);
 		
 		printLine = "Food Supply: " + civ2.food_supply;
@@ -265,7 +265,7 @@ public class WorldSim2
 
 class civ {
 	String name;		
-	int population;
+	float population;
 	int stage; 
 	int wealth;
 	int food_supply; 
