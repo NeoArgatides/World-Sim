@@ -157,7 +157,7 @@ public class WorldSim2
 		float m_technology = (-(2/civ2.wealth)+100)/100; //2 may need to be changed if tech changes too radically (reciprocal 1/x function)
 		int d_tech = (int)(5*m_technology); 
 		
-		float m_health = (-(2/civ2.technology)+100)/100; //health aka inverse deathrate needs to go up with technology, and will go down with infectious diseases which we havent made yet. ok
+		float m_health = -(float)(Math.pow(civ2.technology, -0.25)) + 1; //health aka inverse deathrate needs to go up with technology, and will go down with infectious diseases which we havent made yet. ok
 		int d_health = (int)(5*m_health); 
 		
 		int disease_spike;
