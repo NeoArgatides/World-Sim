@@ -83,7 +83,7 @@ public class WorldSim2
 		int population = rn(5, 25);
 		int stage = 1; 
 		int wealth = rn(1, 6);
-		int food_supply = (int)population/10; //make sure dont break. thx
+		int food_supply = (int)(population/2); //make sure dont break. thx
 		int health = rn(40, 60); 
 		int technology = 1;
 		int incentive = 70; //incentive to have kids
@@ -165,10 +165,7 @@ public class WorldSim2
 		if (disease_spike == 1) {
 			civ2.disease_severity += rn(20, 40);
 			civ2.health -= civ2.disease_severity;
-			
-			if (civ2.disease_severity > 100) {
-				civ2.disease_severity = 100;
-			}
+		
 		}
 		
 		if (civ2.disease_severity > 0) {
@@ -208,7 +205,8 @@ public class WorldSim2
 			civ2.health = 0;
 		if (civ2.incentive < 0)
 			civ2.incentive = 0;
-		
+		if (civ2.disease_severity < 0)
+			civ2.disease_severity = 0;
 		
 		if (civ2.population < 0) {
 			
