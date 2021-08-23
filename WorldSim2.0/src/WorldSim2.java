@@ -112,21 +112,34 @@ public class WorldSim2
 	}
 	
 	public static void singleSim() { //runs a simulation with only a single civ generated. no user input
-		civ NewCiv = initCiv(1);
+		civ newCiv = initCiv(1);
 		
-		int input;
+		int year = 0;
+		
+		int input = 1;
 		while (input != 0) {
 			
+			if (input == 1) {
+				simulate(newCiv);
+				
+				year++;
+				String printLine = "Year " + year + " simulated.";
+				print(printLine);
+				
+			} else if (input == 2) {
+				printReport(newCiv);
+			}
+			
+			print("---");
 			print("0: End simulation");
 			print("1: Simulate new year");
 			print("2: Generate report");
 			Scanner scan = new Scanner(System.in);
 			input = scan.nextInt();
+			
 		}
 	}
-	
-	
-	
+
 	
 	public static civ simulate(civ civ2) {  //simulates 1 year
 		
@@ -209,6 +222,35 @@ public class WorldSim2
 	
 	
 	public static void printReport(civ civ2) {
+		String printLine = "";
+		print("--- REPORT ---");
+		printLine = civ2.name + ", " + civ2.id;
+		print(printLine);
+		print("---");
+		
+		printLine = "Stage: " + civ2.stage;
+		print(printLine);
+	
+		printLine = "Population: " + civ2.population;
+		print(printLine);
+		
+		printLine = "Food Supply: " + civ2.food_supply;
+		print(printLine);
+		
+		printLine = "Wealth: " + civ2.wealth;
+		print(printLine);
+		
+		printLine = "Technology: " + civ2.technology;
+		print(printLine);
+		
+		printLine = "Health: " + civ2.health;
+		print(printLine);
+		
+		printLine = "Incentive: " + civ2.incentive;
+		print(printLine);
+		
+	
+	}
 	public static void print(String input) {
 		System.out.println(input);
 	}
