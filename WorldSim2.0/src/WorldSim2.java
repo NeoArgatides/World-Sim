@@ -39,6 +39,10 @@ public class WorldSim2
 		if (gamemode == 1) {
 			defaultSim();
 		}
+		
+		if (gamemode == 2) {
+			singleSim();
+		}
     }
 		
 	public static String gen_name() { //generate a name for country
@@ -65,6 +69,7 @@ public class WorldSim2
 		print("WorldSim2 v1.0.0");
 		print("Enter gamemode selection:");
 		print("1 - Default World Simulation");
+		print("2 - Single Civilization Simulation");
 		
 		Scanner scan = new Scanner(System.in);
 		int input = scan.nextInt();
@@ -92,6 +97,8 @@ public class WorldSim2
 		return new_civ;
 	}
 	
+	
+	
 	//==============================================================
 	public static void defaultSim() { //initializes and runs default simulation w no user input
 		ArrayList<civ> civ_list = new ArrayList<civ>();
@@ -103,6 +110,22 @@ public class WorldSim2
 			 civ_list.add(initCiv(total_civ_count));
 		}
 	}
+	
+	public static void singleSim() { //runs a simulation with only a single civ generated. no user input
+		civ NewCiv = initCiv(1);
+		
+		int input;
+		while (input != 0) {
+			
+			print("0: End simulation");
+			print("1: Simulate new year");
+			print("2: Generate report");
+			Scanner scan = new Scanner(System.in);
+			input = scan.nextInt();
+		}
+	}
+	
+	
 	
 	
 	public static civ simulate(civ civ2) {  //simulates 1 year
@@ -180,8 +203,12 @@ public class WorldSim2
 		
 		return civ2;
 	}
+
 	
 	
+	
+	
+	public static void printReport(civ civ2) {
 	public static void print(String input) {
 		System.out.println(input);
 	}
