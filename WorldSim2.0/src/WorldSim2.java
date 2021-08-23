@@ -143,18 +143,6 @@ public class WorldSim2
 	
 	public static civ simulate(civ civ2) {  //simulates 1 year
 		
-		if (civ2.wealth < 1)
-			civ2.wealth = 1;
-		if (civ2.population < 0)
-			civ2.population = 0;
-		if (civ2.food_supply < 0)
-			civ2.food_supply = 0;
-		if (civ2.health < 0)
-			civ2.health = 0;
-		if (civ2.incentive < 0)
-			civ2.incentive = 0;
-		
-		
 		//natural population growth
 		float m_population = (civ2.incentive - (100-civ2.health)) / 100;
 		int d_population = (int)(m_population * (civ2.population / 10)); //10 is the exponential modifier may need to be changed (very important)
@@ -210,6 +198,18 @@ public class WorldSim2
 		
 		//cap variables above 0 below 100
 		
+		if (civ2.wealth < 1)
+			civ2.wealth = 1;
+		if (civ2.population < 0)
+			civ2.population = 0;
+		if (civ2.food_supply < 0)
+			civ2.food_supply = 0;
+		if (civ2.health < 0)
+			civ2.health = 0;
+		if (civ2.incentive < 0)
+			civ2.incentive = 0;
+		
+		
 		if (civ2.population < 0) {
 			
 		}
@@ -247,6 +247,9 @@ public class WorldSim2
 		print(printLine);
 		
 		printLine = "Incentive: " + civ2.incentive;
+		print(printLine);
+		
+		printLine = "Disease: " + civ2.disease_severity;
 		print(printLine);
 		
 	
