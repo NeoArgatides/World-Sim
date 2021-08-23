@@ -120,7 +120,7 @@ public class WorldSim2
 		while (input != 0) {
 			
 			if (input == 1) {
-				simulate(newCiv);
+				simulate(newCiv, 0);
 				
 				year++;
 				String printLine = "Year " + year + " simulated.";
@@ -128,12 +128,20 @@ public class WorldSim2
 				
 			} else if (input == 2) {
 				printReport(newCiv);
+			} else if (input == 3) {
+				simulate(newCiv, 1);
+				
+				year++;
+				String printLine = "Year " + year + " simulated (+ debug).";
+				print(printLine);
 			}
 			
+			print("\n");
 			print("---");
 			print("0: End simulation");
 			print("1: Simulate new year");
 			print("2: Generate report");
+			print("3: Simulate new year + debug");
 			Scanner scan = new Scanner(System.in);
 			input = scan.nextInt();
 			
@@ -141,10 +149,10 @@ public class WorldSim2
 	}
 
 	
-	public static civ simulate(civ civ2) {  //simulates 1 year
+	public static civ simulate(civ civ2, int debug) {  //simulates 1 year
 		
 		//natural population growth
-		float m_population = (civ2.incentive - (100-civ2.health)) / 100;
+		float m_population = ((civ2.incentive - (100-civ2.health)) / 100);
 		float d_population = (m_population * (civ2.population / 10)); //10 is the exponential modifier may need to be changed (very important)
 		
 		//starvation
@@ -177,11 +185,11 @@ public class WorldSim2
 		//determine delta incentive to have sex
 		int d_incentive = 0;
 		d_incentive -= (int)((100 - civ2.health) + civ2.disease_severity)/10;
-		d_incentive += (int)(5*(-(10/civ2.wealth)+100)/100);
+		d_incentive += (int)(3*(-(10/civ2.wealth)+100)/100); //3 is the modifier. make sure its good
 		d_incentive++;
 		
 		//producing da food
-		civ2.food_supply += (int) (civ2.population * 1.4 * m_health);
+		civ2.food_supply += (int)(civ2.population * 1.4 * m_health);
 		civ2.food_supply--; //da food go bad
 		
 		//eatin da food
@@ -209,9 +217,36 @@ public class WorldSim2
 			civ2.disease_severity = 0;
 		
 		if (civ2.population < 0) {
-			
 		}
 		
+		
+		if (debug == 1) {
+			print("\n");
+			print("--- DEBUG ---");
+			String printLine = civ2.name + ", " + civ2.id;
+			print(printLine);
+			print("---");
+			
+			printLine = "m_population: " + m_population;
+			print(printLine);
+			printLine = "d_population: " + d_population;
+			print(printLine);
+			
+			printLine = "m_technology: " + m_technology;
+			print(printLine);
+			printLine = "d_technology: " + d_tech;
+			print(printLine);
+			
+			printLine = "m_health: " + m_health;
+			print(printLine);
+			printLine = "d_health: " + d_health;
+			print(printLine);
+			
+			printLine = "d_incentive: " + d_incentive;
+			print(printLine);
+			
+			print("---");
+		}
 		return civ2;
 	}
 
@@ -220,9 +255,9 @@ public class WorldSim2
 	
 	
 	public static void printReport(civ civ2) {
-		String printLine = "";
+		print("\n");
 		print("--- REPORT ---");
-		printLine = civ2.name + ", " + civ2.id;
+		String printLine = civ2.name + ", " + civ2.id;
 		print(printLine);
 		print("---");
 		
@@ -249,9 +284,9 @@ public class WorldSim2
 		
 		printLine = "Disease: " + civ2.disease_severity;
 		print(printLine);
-		
-	
+		print("---");
 	}
+	
 	public static void print(String input) {
 		System.out.println(input);
 	}
