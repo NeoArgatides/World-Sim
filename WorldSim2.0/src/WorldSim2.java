@@ -213,7 +213,14 @@ public class WorldSim2
 		//health+incentive determination
 		
 		civ2.health = (int)(  (-(float)(Math.pow(civ2.technology, -0.2)) + 1) *100 ) - civ2.disease_severity;
-		civ2.incentive = (int) ( (((5000/ ( (float)civ2.wealth+50 )) + (100-((100 - civ2.health) + civ2.disease_severity)/2))) /2);
+		
+		float f_incentive1 = (100- ((100-civ2.health) + civ2.disease_severity )/2); //factor for incentive 1
+		float f_incentive2 = (5000/ ( (float)civ2.wealth+50 )); //factor for incentive 2
+		
+		civ2.incentive = (int)((f_incentive1 + f_incentive2)/2);
+		
+		
+		//civ2.incentive = (int) ( (((5000/ ( (float)civ2.wealth+50 )) +  (100- ((100-civ2.health) + civ2.disease_severity )/2)    /2);
 		
 		
 		// legacy method of determining health+incentive. leaving variables because of cross-use as well as for maintaining debug menu functionality
