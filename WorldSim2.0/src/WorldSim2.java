@@ -176,24 +176,24 @@ public class WorldSim2
 		
 		//change in the tech and the health
 		float m_technology = (-(2/(float)civ2.wealth)+100)/100; //2 may need to be changed if tech changes too radically (reciprocal 1/x function)
-		int d_tech = (int)(5*m_technology); 
+		int d_tech = (int)(3*m_technology); 
 		
 		float m_health = -(float)(Math.pow(civ2.technology, -0.25)) + 1;  //health aka inverse deathrate needs to go up with technology, and will go down with infectious diseases which we havent made yet. ok
 		int d_health = (int)(5*m_health); 
 		
 		int disease_spike;
-		disease_spike = rn(0, 20);
+		disease_spike = rn(0, 22);
 		if (disease_spike == 1) {
-			civ2.disease_severity += rn(20, 40);
+			civ2.disease_severity += rn(25, 50);
 		}
 		
 		if (civ2.disease_severity > 0) {
-			d_population -= (int)(((float)civ2.disease_severity / 100) * ((float)civ2.population / 10)); //dying of disease
+			d_population -= (int)(((float)civ2.disease_severity / 100) * ((float)civ2.population / 6)); //dying of disease
 			
-			civ2.disease_severity -= (int)(6*m_health); //disease severity going down based on technology as defined above	
+			civ2.disease_severity -= (int)(4*m_health); //disease severity going down based on technology as defined above	
 		}
 				
-		//determine delta incentive to have sex
+		//legacy method to determine delta incentive 
 		int d_incentive = 0;
 		d_incentive -= (int)((100 - civ2.health) + civ2.disease_severity)/10;
 		d_incentive += (int)(3*(-(10/(float)civ2.wealth)+100)/100); //3 is the modifier. make sure its good
@@ -211,7 +211,6 @@ public class WorldSim2
 		civ2.technology += d_tech;
 		
 		//health+incentive determination
-		
 		civ2.health = (int)(  (-(float)(Math.pow(civ2.technology, -0.2)) + 1) *100 ) - civ2.disease_severity;
 		
 		float f_incentive1 = (100- ((100-civ2.health) + civ2.disease_severity )/2); //factor for incentive 1
@@ -241,6 +240,9 @@ public class WorldSim2
 			civ2.incentive = 0;
 		if (civ2.disease_severity < 0)
 			civ2.disease_severity = 0;
+		if (civ2.disease_severity > 100)
+			civ2.disease_severity = 100;
+		
 		
 		if (civ2.population < 0) {
 		}
