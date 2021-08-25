@@ -47,9 +47,9 @@ public class WorldSim2
 		
 	public static String gen_name() { //generate a name for country
 
-		String[] syllables_1 = { "Kek", "Tru", "Ve", "Swed", "Dra", "Sea", "Se", "Ame", "Co", "Las", "Lac", "Azer", "Colum", "Bhu", "Bar"};
-		String[] syllables_2 = { "ki", "ik", "ak", "", "i", "ek", "ti", "ji", "bi", "ri", "ri", "ru"};
-		String[] syllables_3 = { "stan", "land", "la", "go", "en", "ca", "an", "any", "na", "len", "tia"};
+		String[] syllables_1 = { "Kek", "Dra", "Se", "Ame", "Le", "Lac", "Bar"}; 
+		String[] syllables_2 = { "ki", "ak", "", "i", "ke", "ti", "ji", "ri", "ki", "ru"};
+		String[] syllables_3 = { "stan", "land", "la", "go", "en", "ca", "an", "na", "len", "tia"};
 		
 		
 		Random rand = new Random(); 
@@ -97,8 +97,7 @@ public class WorldSim2
 		return new_civ;
 	}
 	
-	
-	
+
 	//==============================================================
 	public static void defaultSim() { //initializes and runs default simulation w no user input
 		ArrayList<civ> civ_list = new ArrayList<civ>();
@@ -128,12 +127,26 @@ public class WorldSim2
 				
 			} else if (input == 2) {
 				printReport(newCiv);
+				
 			} else if (input == 3) {
 				simulate(newCiv, 1);
-				
+	
 				year++;
 				String printLine = "Year " + year + " simulated (+ debug).";
 				print(printLine);
+			} else if (input == 4) {
+				
+				print("How many years? ");
+				Scanner scan = new Scanner(System.in);
+				int input2 = scan.nextInt();
+				
+				for (int i = 0; i < input2; i++) {
+					simulate(newCiv, 0);
+					year++;
+					String printLine = "Year " + year + " simulated.";
+					print(printLine);
+				}
+				
 			}
 			
 			print("\n");
@@ -142,13 +155,13 @@ public class WorldSim2
 			print("1: Simulate new year");
 			print("2: Generate report");
 			print("3: Simulate new year + debug");
+			print("4: Simulate [x] years.");
 			Scanner scan = new Scanner(System.in);
 			input = scan.nextInt();
 			
 		}
 	}
 
-	
 	public static civ simulate(civ civ2, int debug) {  //simulates 1 year
 		
 		//natural population growth
@@ -172,8 +185,6 @@ public class WorldSim2
 		disease_spike = rn(0, 20);
 		if (disease_spike == 1) {
 			civ2.disease_severity += rn(20, 40);
-			civ2.health -= civ2.disease_severity;
-		
 		}
 		
 		if (civ2.disease_severity > 0) {
@@ -198,7 +209,14 @@ public class WorldSim2
 		//apply deltas
 		civ2.population += d_population;
 		civ2.technology += d_tech;
-		civ2.health += d_health;
+		
+		//health+incentive determination
+		
+		civ2.health = (int)(  (-(float)(Math.pow(civ2.technology, -0.2)) + 1) *100 ) - civ2.disease_severity;;
+		
+		
+		// legacy method of determining health+incentive. leaving variables because of cross-use as well as for maintaining debug menu functionality
+		//civ2.health += d_health; 
 		civ2.incentive += d_incentive;
 		
 		//cap variables above 0 below 100
