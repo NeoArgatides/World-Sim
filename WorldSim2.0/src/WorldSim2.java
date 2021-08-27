@@ -49,7 +49,7 @@ public class WorldSim2
 
 		String[] syllables_1 = { "Kek", "Dra", "Se", "Ame", "Le", "Lac", "Bar"}; 
 		String[] syllables_2 = { "ki", "ak", "", "i", "ke", "ti", "ji", "ri", "ki", "ru"};
-		String[] syllables_3 = { "stan", "land", "la", "go", "en", "ca", "an", "na", "len", "tia"};
+		String[] syllables_3 = { "stan", "land", "la", "go", "en", "ca", "an", "na", "tia"};
 		
 		
 		Random rand = new Random(); 
@@ -80,7 +80,7 @@ public class WorldSim2
 	public static civ initCiv(int total_civ_count) {	//init new civilization stats, generate name etc. total civ count is inputted for ID
 		
 		String name = gen_name();		
-		int population = rn(5, 25);
+		int population = rn(20, 25);
 		int stage = 1; 
 		int wealth = rn(1, 6);
 		int food_supply = (int)(population/2); //make sure dont break. thx
@@ -188,7 +188,7 @@ public class WorldSim2
 		}
 		
 		if (civ2.disease_severity > 0) {
-			d_population -= (int)(((float)civ2.disease_severity / 100) * ((float)civ2.population / 6)); //dying of disease
+			d_population -= (int)(((float)civ2.disease_severity / 100) * ((float)civ2.population / 8)); //dying of disease
 			
 			civ2.disease_severity -= (int)(4*m_health); //disease severity going down based on technology as defined above	
 		}
@@ -200,11 +200,10 @@ public class WorldSim2
 		d_incentive++;
 		
 		//producing da food
-		civ2.food_supply += (int)(civ2.population * 1.4 * m_health);
-		civ2.food_supply--; //da food go bad
+		civ2.food_supply += (int)((float)(civ2.population/10) * (-(float)(Math.pow((civ2.technology+1), -0.5)) + 1.5));
 		
 		//eatin da food
-		civ2.food_supply -= (int)((float)civ2.population/10);
+		civ2.food_supply -= (int)((float)(civ2.population/10));
 		
 		//apply deltas
 		civ2.population += d_population;
