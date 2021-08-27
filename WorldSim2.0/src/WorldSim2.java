@@ -201,10 +201,13 @@ public class WorldSim2
 		
 		//producing da food
 		civ2.food_supply += (int)((float)(civ2.population/10) * (-(float)(Math.pow((civ2.technology+1), -0.5)) + 1.5));
-		civ2.food_supply = (int)(civ2.food_supply* (rn(90,100)/100));
+		
 		
 		//eatin da food
 		civ2.food_supply -= (int)((float)(civ2.population/10));
+		float i = civ2.food_supply;
+		civ2.food_supply = (int)(i * (rn(90, 100)/100));
+		
 		
 		//apply deltas
 		civ2.population += d_population;
