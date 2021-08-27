@@ -80,7 +80,7 @@ public class WorldSim2
 	public static civ initCiv(int total_civ_count) {	//init new civilization stats, generate name etc. total civ count is inputted for ID
 		
 		String name = gen_name();		
-		int population = rn(20, 25);
+		int population = rn(6, 25);
 		int stage = 1; 
 		int wealth = rn(1, 6);
 		int food_supply = (int)(population/2); //make sure dont break. thx
@@ -201,6 +201,7 @@ public class WorldSim2
 		
 		//producing da food
 		civ2.food_supply += (int)((float)(civ2.population/10) * (-(float)(Math.pow((civ2.technology+1), -0.5)) + 1.5));
+		civ2.food_supply = (int)(civ2.food_supply* (rn(90,100)/100));
 		
 		//eatin da food
 		civ2.food_supply -= (int)((float)(civ2.population/10));
