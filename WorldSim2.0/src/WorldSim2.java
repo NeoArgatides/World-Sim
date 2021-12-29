@@ -96,7 +96,7 @@ public class WorldSim2
 		civ new_civ = new civ(name, population, stage, wealth, food_supply, health, technology, id, x, y, incentive);	
 		return new_civ;
 	}
-	
+
 
 	//==============================================================
 	public static void defaultSim() { //initializes and runs default simulation w no user input
