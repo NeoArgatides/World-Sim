@@ -47,10 +47,9 @@ public class WorldSim2
 		
 	public static String gen_name() { //generate a name for country
 
-		String[] syllables_1 = { "Kek", "Dra", "Se", "Ame", "Le", "Lac", "Bar"}; 
-		String[] syllables_2 = { "ki", "ak", "", "i", "ke", "ti", "ji", "ri", "ki", "ru"};
-		String[] syllables_3 = { "stan", "land", "la", "go", "en", "ca", "an", "na", "tia"};
-		
+		String[] syllables_1 = { "Kek", "Dra", "Se", "Ame", "Le", "Lac", "Bar", "Arc'"}; 
+		String[] syllables_2 = { "ki", "ak", "", "i", "ke", "ti", "ji", "ri", "ki", "ru", "te"};
+		String[] syllables_3 = { "stan", "land", "la", "go", "en", "ca", "an", "na", "tia", "ryx"};
 		
 		Random rand = new Random(); 
 		int rand_int1 = rand.nextInt(syllables_1.length);
@@ -164,73 +163,9 @@ public class WorldSim2
 
 	public static civ simulate(civ civ2, int debug) {  //simulates 1 year
 		
-		//natural population growth
-		float m_population = (((float)civ2.incentive - (100-(float)civ2.health)) / 100);
-		float d_population = (m_population * ((float)civ2.population / 10)); //10 is the exponential modifier may need to be changed (very important)
 		
-		//starvation
-		if (civ2.food_supply*10 < civ2.population) {
-			int population_over_food = ((int)civ2.population - (civ2.food_supply*10)); //people not supported by current food
-			d_population -= population_over_food/2;
-		}
-		
-		//change in the tech and the health
-		float m_technology = (-(2/(float)civ2.wealth)+100)/100; //2 may need to be changed if tech changes too radically (reciprocal 1/x function)
-		int d_tech = (int)(3*m_technology); 
-		
-		float m_health = -(float)(Math.pow(civ2.technology, -0.25)) + 1;  //health aka inverse deathrate needs to go up with technology, and will go down with infectious diseases which we havent made yet. ok
-		int d_health = (int)(5*m_health); 
-		
-		int disease_spike;
-		disease_spike = rn(0, 22);
-		if (disease_spike == 1) {
-			civ2.disease_severity += rn(25, 50);
-		}
-		
-		if (civ2.disease_severity > 0) {
-			d_population -= (int)(((float)civ2.disease_severity / 100) * ((float)civ2.population / 8)); //dying of disease
-			
-			civ2.disease_severity -= (int)(4*m_health); //disease severity going down based on technology as defined above	
-		}
-				
-		//legacy method to determine delta incentive 
-		int d_incentive = 0;
-		d_incentive -= (int)((100 - civ2.health) + civ2.disease_severity)/10;
-		d_incentive += (int)(3*(-(10/(float)civ2.wealth)+100)/100); //3 is the modifier. make sure its good
-		d_incentive++;
-		
-		//producing da food
-		civ2.food_supply += (int)((float)(civ2.population/10) * (-(float)(Math.pow((civ2.technology+1), -0.5)) + 1.5));
-		
-		
-		//eatin da food
-		civ2.food_supply -= (int)((float)(civ2.population/10));
-		float i = civ2.food_supply;
-		civ2.food_supply = (int)(i * (rn(90, 100)/100));
-		
-		
-		//apply deltas
-		civ2.population += d_population;
-		civ2.technology += d_tech;
-		
-		//health+incentive determination
-		civ2.health = (int)(  (-(float)(Math.pow(civ2.technology, -0.2)) + 1) *100 ) - civ2.disease_severity;
-		
-		float f_incentive1 = (100- ((100-civ2.health) + civ2.disease_severity )/2); //factor for incentive 1
-		float f_incentive2 = (5000/ ( (float)civ2.wealth+50 )); //factor for incentive 2
-		
-		civ2.incentive = (int)((f_incentive1 + f_incentive2)/2);
-		
-		
-		//civ2.incentive = (int) ( (((5000/ ( (float)civ2.wealth+50 )) +  (100- ((100-civ2.health) + civ2.disease_severity )/2)    /2);
-		
-		
-		// legacy method of determining health+incentive. leaving variables because of cross-use as well as for maintaining debug menu functionality
-		//civ2.health += d_health; 
-		//civ2.incentive += d_incentive;
 		
 		//cap variables above 0 below 100
-		
 		if (civ2.wealth < 1)
 			civ2.wealth = 1;
 		if (civ2.population < 0)
@@ -246,11 +181,6 @@ public class WorldSim2
 		if (civ2.disease_severity > 100)
 			civ2.disease_severity = 100;
 		
-		
-		if (civ2.population < 0) {
-		}
-		
-		
 		if (debug == 1) {
 			print("\n");
 			print("--- DEBUG ---");
@@ -258,33 +188,11 @@ public class WorldSim2
 			print(printLine);
 			print("---");
 			
-			printLine = "m_population: " + m_population;
-			print(printLine);
-			printLine = "d_population: " + d_population;
-			print(printLine);
-			
-			printLine = "m_technology: " + m_technology;
-			print(printLine);
-			printLine = "d_technology: " + d_tech;
-			print(printLine);
-			
-			printLine = "m_health: " + m_health;
-			print(printLine);
-			printLine = "d_health: " + d_health;
-			print(printLine);
-			
-			printLine = "d_incentive: " + d_incentive;
-			print(printLine);
-			
 			print("---");
 		}
 		return civ2;
 	}
 
-	
-	
-	
-	
 	public static void printReport(civ civ2) {
 		print("\n");
 		print("--- REPORT ---");
