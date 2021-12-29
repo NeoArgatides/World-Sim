@@ -1,5 +1,7 @@
 //drake3
 
+//change notes: 
+
 /*
 String print = "";
 System.out.println(print);
@@ -79,20 +81,21 @@ public class WorldSim2
 	public static civ initCiv(int total_civ_count) {	//init new civilization stats, generate name etc. total civ count is inputted for ID
 		
 		String name = gen_name();		
-		int population = rn(6, 25);
-		int stage = 1; 
-		int wealth = rn(1, 6);
-		int food_supply = (int)(population/2); //make sure dont break. thx
-		int health = rn(40, 60); 
-		int technology = 1;
-		int incentive = 70; //incentive to have kids
+		int population = rn(6, 20); //ppl in the civ
+		int stage = 1; //determined by technology 
+		int wealth = 5; //abstract concept
+		int industry = 80; //percent of people working
+		int food_supply = 0;
+		int health = rn(30, 50); //wellbeing of population
+		int technology = 1; //advancement of the country
+		int incentive = 0; //incentive to have kids
 		
 		int id = total_civ_count;
 		
 		int x = rn(0, 100);
 		int y = rn(0, 100);
 		
-		civ new_civ = new civ(name, population, stage, wealth, food_supply, health, technology, id, x, y, incentive);	
+		civ new_civ = new civ(name, population, stage, wealth, food_supply, health, technology, id, x, y, incentive, industry);	
 		return new_civ;
 	}
 
@@ -162,6 +165,11 @@ public class WorldSim2
 	}
 
 	public static civ simulate(civ civ2, int debug) {  //simulates 1 year
+		
+		
+		 
+		
+		
 		
 		
 		
@@ -242,6 +250,7 @@ class civ {
 	float population;
 	int stage; 
 	int wealth;
+	int industry;
 	int food_supply; 
 	int health; 
 	int technology;
@@ -253,11 +262,12 @@ class civ {
 	int x;
 	int y;
 	
-	public civ(String i_name, int i_population, int i_stage, int i_wealth, int i_food_supply, int i_health, int i_technology, int i_id, int i_x, int i_y, int i_incentive) {
+	public civ(String i_name, int i_population, int i_stage, int i_wealth, int i_food_supply, int i_health, int i_technology, int i_id, int i_x, int i_y, int i_incentive, int i_industry) {
 		name = i_name;
 		population = i_population;
 		stage = i_stage;
 		wealth = i_wealth;
+		industry = i_industry;
 		food_supply = i_food_supply;
 		health = i_health;
 		technology = i_technology;
