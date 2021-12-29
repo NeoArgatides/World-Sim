@@ -166,9 +166,10 @@ public class WorldSim2
 
 	public static civ simulate(civ civ2, int debug) {  //simulates 1 year
 		
+		float m_technology;
 		
-		 
-		civ2.wealth += 1;
+		civ2.wealth += civ2.industry/4;
+		//civ2.technology = 
 		
 		
 		
