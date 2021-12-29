@@ -168,7 +168,7 @@ public class WorldSim2
 		
 		
 		 
-		
+		civ2.wealth += 1;
 		
 		
 		
